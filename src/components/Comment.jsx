@@ -19,12 +19,13 @@ export default function Comment({ comment, depth = 0 }) {
   if (!comment || !comment.text || comment.deleted) return null;
 
   const maxDepth = 5;
-  const indentWidth = Math.min(depth, maxDepth) * 1.5;
+  // Use smaller indentation multiplier for better mobile experience
+  const indentWidth = Math.min(depth, maxDepth) * 0.25;
 
   return (
     <div className="py-2">
-      <div style={{ marginLeft: `${indentWidth}rem` }}>
-        <div className="border-l border-slate-700 pl-4">
+      <div className="md:ml-0" style={{ marginLeft: `${indentWidth}rem` }}>
+        <div className="border-l border-slate-700 pl-2 md:pl-4">
           <div className="text-xs text-slate-500 mb-1">
             <Link
               to={`/user/${comment.by}`}
