@@ -55,67 +55,96 @@ export default function ItemDetail() {
     );
   }
 
+  const upvoteUrl = `https://news.ycombinator.com/item?id=${item.id}`;
+
   return (
     <div className="min-h-screen">
       <Navigation />
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        <div className="mb-6">
-          {item.url ? (
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl text-slate-200 hover:text-white leading-tight block mb-2"
-            >
-              {item.title}
-            </a>
-          ) : (
-            <h1 className="text-xl text-slate-200 mb-2">{item.title}</h1>
-          )}
-          <div className="text-xs text-slate-500">
-            {item.score !== undefined && `${item.score} points by `}
-            <Link
-              to={`/user/${item.by}`}
-              className="hover:underline text-slate-400 hover:text-slate-300"
-            >
-              {item.by}
-            </Link>
-            {item.time && ` ${timeAgo(item.time)}`}
-            {item.url && (
-              <span className="ml-2">({getDomain(item.url)})</span>
-            )}
-            {item.kids && item.kids.length > 0 && (
-              <span className="ml-2">
-                | {item.kids.length} {item.kids.length === 1 ? 'comment' : 'comments'}
-              </span>
-            )}
-            {item.id && (
-              <span className="ml-2">
-                | <a
-                  href={`https://news.ycombinator.com/item?id=${item.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline text-slate-400 hover:text-slate-300"
-                >
-                  view on HN
-                </a>
-              </span>
-            )}
-          </div>
+      <main className="max-w-4xl mx-auto px-4 py-2">
+        <div className="mb-4">
+          <table className="w-full border-collapse">
+            <tbody>
+              <tr>
+                <td className="align-top" style={{ width: '1%', paddingRight: '4px' }}>
+                  <a
+                    href={upvoteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-1"
+                    title="Upvote on Hacker News"
+                  >
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      className="fill-slate-600 hover:fill-orange-500 transition-colors"
+                      style={{ display: 'block' }}
+                    >
+                      <path d="M0 7l5-7 5 7z" />
+                    </svg>
+                  </a>
+                </td>
+                <td className="align-top">
+                  {item.url ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-base text-slate-400 hover:underline leading-tight block mb-1"
+                    >
+                      {item.title}
+                    </a>
+                  ) : (
+                    <h1 className="text-base text-slate-400 mb-1">{item.title}</h1>
+                  )}
+                  <div className="text-xs text-slate-500">
+                    {item.score !== undefined && `${item.score} points `}
+                    <span>by </span>
+                    <Link
+                      to={`/user/${item.by}`}
+                      className="hover:underline text-slate-400 hover:text-slate-300"
+                    >
+                      {item.by}
+                    </Link>
+                    {item.time && ` ${timeAgo(item.time)}`}
+                    {item.url && (
+                      <span className="ml-1">({getDomain(item.url)})</span>
+                    )}
+                    {item.kids && item.kids.length > 0 && (
+                      <span className="ml-1">
+                        | {item.kids.length} {item.kids.length === 1 ? 'comment' : 'comments'}
+                      </span>
+                    )}
+                    {item.id && (
+                      <span className="ml-1">
+                        | <a
+                          href={`https://news.ycombinator.com/item?id=${item.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline text-slate-400 hover:text-slate-300"
+                        >
+                          view on HN
+                        </a>
+                      </span>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {item.text && (
           <div
-            className="mb-6 text-slate-300 leading-relaxed [&_pre]:whitespace-pre-wrap [&_p]:mb-2 [&_code]:bg-slate-800 [&_code]:px-1 [&_code]:rounded"
+            className="mb-4 text-xs text-slate-300 leading-normal [&_pre]:whitespace-pre-wrap [&_p]:mb-1.5 [&_code]:bg-slate-800 [&_code]:px-1 [&_code]:rounded [&_a]:text-slate-400 [&_a]:hover:underline"
             dangerouslySetInnerHTML={{ __html: item.text }}
           />
         )}
 
         {comments.length > 0 && (
-          <div className="border-t border-slate-700 pt-6">
-            <h2 className="text-lg text-slate-300 mb-4">Comments</h2>
+          <div className="border-t border-slate-700 pt-3 mt-4">
             {comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} depth={0} />
+              <Comment key={comment.id} comment={comment} depth={0} parentItemId={item.id} />
             ))}
           </div>
         )}

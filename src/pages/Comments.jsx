@@ -59,40 +59,67 @@ export default function Comments() {
     <div className="min-h-screen">
       <Navigation />
       <main className="max-w-4xl mx-auto">
-        <div className="bg-slate-800 border-t border-slate-700">
+        <div>
           {stories.map((story, index) => {
             const startIndex = (page - 1) * storiesPerPage;
+            const upvoteUrl = `https://news.ycombinator.com/item?id=${story.id}`;
             return (
             <div
               key={story.id}
-              className="border-b border-slate-700 py-3 px-4 hover:bg-slate-800/50 transition-colors"
+              className="border-b border-slate-700 py-2 px-3 hover:bg-slate-800/50 transition-colors"
             >
-              <div className="flex items-start gap-2">
-                <span className="text-sm text-slate-500 min-w-[2rem]">
-                  {startIndex + index + 1}.
-                </span>
-                <div className="flex-1">
-                  <Link
-                    to={`/item/${story.id}`}
-                    className="text-sm text-slate-300 hover:text-white leading-tight block"
-                  >
-                    {story.title}
-                  </Link>
-                  <div className="text-xs text-slate-500 mt-1">
-                    {story.score !== undefined && `${story.score} points by `}
-                    <Link
-                      to={`/user/${story.by}`}
-                      className="hover:underline text-slate-400 hover:text-slate-300"
-                    >
-                      {story.by}
-                    </Link>
-                    {story.time && ` ${timeAgo(story.time)}`}
-                    <span className="ml-2">
-                      | {story.descendants || 0} comments
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <table className="w-full border-collapse">
+                <tbody>
+                  <tr>
+                    <td className="align-top pr-1" style={{ width: '1%' }}>
+                      <span className="text-xs text-slate-500 pr-1">
+                        {startIndex + index + 1}.
+                      </span>
+                    </td>
+                    <td className="align-top" style={{ width: '1%', paddingRight: '4px' }}>
+                      <a
+                        href={upvoteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block mt-1"
+                        title="Upvote on Hacker News"
+                      >
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          className="fill-slate-600 hover:fill-orange-500 transition-colors"
+                          style={{ display: 'block' }}
+                        >
+                          <path d="M0 7l5-7 5 7z" />
+                        </svg>
+                      </a>
+                    </td>
+                    <td className="align-top">
+                      <Link
+                        to={`/item/${story.id}`}
+                        className="text-sm text-slate-400 hover:underline leading-tight block mb-0.5"
+                      >
+                        {story.title}
+                      </Link>
+                      <div className="text-xs text-slate-500">
+                        {story.score !== undefined && `${story.score} points `}
+                        <span>by </span>
+                        <Link
+                          to={`/user/${story.by}`}
+                          className="hover:underline text-slate-400 hover:text-slate-300"
+                        >
+                          {story.by}
+                        </Link>
+                        {story.time && ` ${timeAgo(story.time)}`}
+                        <span className="ml-1">
+                          | {story.descendants || 0} comments
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             );
           })}

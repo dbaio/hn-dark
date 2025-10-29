@@ -69,7 +69,7 @@ export default function StoryList({ type = 'top' }) {
     <div className="min-h-screen">
       <Navigation />
       <main className="max-w-4xl mx-auto">
-        <div className="bg-slate-800 border-t border-b border-slate-700">
+        <div>
           {stories.map((story, index) => {
             const startIndex = (page - 1) * storiesPerPage;
             return <Post key={story.id} post={story} index={startIndex + index} />;
