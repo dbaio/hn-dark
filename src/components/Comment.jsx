@@ -16,7 +16,7 @@ export default function Comment({ comment, depth = 0, parentItemId = null }) {
     }
   }, [comment]);
 
-  if (!comment || !comment.text || comment.deleted) return null;
+  if (!comment || !comment.text || comment.deleted || comment.dead) return null;
 
   const maxDepth = 5;
   // Use smaller indentation multiplier for better mobile experience

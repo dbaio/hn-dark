@@ -31,7 +31,7 @@ export default function StoryList({ type = 'top' }) {
         
         const storyPromises = pageIds.map((id) => getItem(id));
         const fetchedStories = await Promise.all(storyPromises);
-        setStories(fetchedStories.filter(Boolean));
+        setStories(fetchedStories.filter(story => story && !story.dead && !story.deleted));
       } catch (err) {
         setError('Failed to fetch stories');
         console.error(err);

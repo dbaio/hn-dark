@@ -21,7 +21,7 @@ export default function ItemDetail() {
         if (fetchedItem && fetchedItem.kids) {
           const commentPromises = fetchedItem.kids.map((kidId) => getItem(kidId));
           const fetchedComments = await Promise.all(commentPromises);
-          setComments(fetchedComments.filter(Boolean));
+          setComments(fetchedComments.filter(comment => comment && !comment.dead && !comment.deleted));
         }
       } catch (err) {
         console.error(err);

@@ -69,7 +69,7 @@ export const getStoriesFromDomain = async (domain, page = 0) => {
     const filtered = data.hits
       .filter(hit => {
         if (!hit.url || !hit.title) return false;
-        if (hit.title === '[deleted]' || hit.author === null) return false;
+        if (hit.title === '[deleted]' || hit.author === null || hit._tags?.includes('dead')) return false;
         const hitDomain = getDomain(hit.url);
         return hitDomain === domain;
       })

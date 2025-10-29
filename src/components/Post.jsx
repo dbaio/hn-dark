@@ -2,7 +2,7 @@ import { timeAgo, getDomain } from '../services/hnApi';
 import { Link } from 'react-router-dom';
 
 export default function Post({ post, index, showIndex = true }) {
-  if (!post) return null;
+  if (!post || post.dead || post.deleted) return null;
 
   const upvoteUrl = `https://news.ycombinator.com/item?id=${post.id}`;
 

@@ -26,7 +26,7 @@ export default function Comments() {
         
         // Filter items that are likely comment threads (no URL) and sort by number of kids
         const commentThreads = fetchedStories
-          .filter((story) => story && story.kids && story.kids.length > 0)
+          .filter((story) => story && !story.dead && !story.deleted && story.kids && story.kids.length > 0)
           .sort((a, b) => (b.descendants || 0) - (a.descendants || 0));
         
         const startIndex = (page - 1) * storiesPerPage;

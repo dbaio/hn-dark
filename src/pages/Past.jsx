@@ -42,7 +42,7 @@ export default function Past() {
         
         // Filter for story items and sort by score
         const storyItems = fetchedStories
-          .filter((item) => item.type === 'story' && item.title)
+          .filter((item) => item && !item.dead && !item.deleted && item.type === 'story' && item.title)
           .sort((a, b) => (b.score || 0) - (a.score || 0));
         
         const startIndex = (page - 1) * storiesPerPage;
