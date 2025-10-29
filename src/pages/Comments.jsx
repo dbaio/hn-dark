@@ -58,7 +58,8 @@ export default function Comments() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <main className="max-w-4xl mx-auto">
+      <main className="max-w-4xl mx-auto px-4 py-4">
+        <h2 className="text-lg text-slate-300 mb-4">Comments</h2>
         <div>
           {stories.map((story, index) => {
             const startIndex = (page - 1) * storiesPerPage;

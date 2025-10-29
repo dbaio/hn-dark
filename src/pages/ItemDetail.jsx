@@ -148,6 +148,7 @@ export default function ItemDetail() {
 
         {comments.length > 0 && (
           <div className="border-t border-slate-700 pt-3 mt-4">
+            <h2 className="text-lg text-slate-300 mb-4">Comments</h2>
             {comments.map((comment) => (
               <Comment key={comment.id} comment={comment} depth={0} parentItemId={item.id} />
             ))}
