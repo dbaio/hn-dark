@@ -11,19 +11,9 @@ export default function About() {
           <div className="space-y-6 text-slate-300">
             <p>
               HN Dark is a dark mode interface for reading Hacker News. 
-              It provides a more comfortable viewing experience during extended reading sessions.
+              It uses the Hacker News API and the Algolia search API to provide a comfortable viewing experience. 
+              Upvotes and replies will redirect you to the official website.
             </p>
-            
-            <div>
-              <h2 className="text-xl font-semibold text-slate-200 mb-3">Features</h2>
-              <ul className="list-disc list-inside space-y-1 text-slate-400 ml-2">
-                <li>Dark theme with optimized contrast</li>
-                <li>All HN content sections</li>
-                <li>Threaded comments</li>
-                <li>Pagination</li>
-                <li>Mobile responsive</li>
-              </ul>
-            </div>
             
             <div>
               <h2 className="text-xl font-semibold text-slate-200 mb-3">Technical</h2>
@@ -32,13 +22,14 @@ export default function About() {
                 <li>TailwindCSS for styling</li>
                 <li>React Router for navigation</li>
                 <li>Hacker News API for data</li>
+                <li>Algolia search API for searching</li>
               </ul>
             </div>
             
             <div>
               <h2 className="text-xl font-semibold text-slate-200 mb-3">Privacy</h2>
               <p className="text-slate-400">
-                HN Dark is a read-only interface. No data is collected or stored. 
+                HN Dark is a read-only interface for Hacker News. No data is collected or stored. 
                 Content is fetched directly from the Hacker News API.
               </p>
             </div>
