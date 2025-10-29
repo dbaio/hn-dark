@@ -99,7 +99,7 @@ export default function Comments() {
                     <td className="align-top">
                       <Link
                         to={`/item/${story.id}`}
-                        className="text-sm text-slate-400 hover:underline leading-tight block mb-0.5"
+                        className="text-sm text-slate-600 hover:underline hover:text-slate-500 leading-tight block mb-0.5"
                       >
                         {story.title}
                       </Link>
@@ -108,7 +108,7 @@ export default function Comments() {
                         <span>by </span>
                         <Link
                           to={`/user/${story.by}`}
-                          className="hover:underline text-slate-400 hover:text-slate-300"
+                          className="hover:underline text-slate-600 hover:text-slate-500"
                         >
                           {story.by}
                         </Link>

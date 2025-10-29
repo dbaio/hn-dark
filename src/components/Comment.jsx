@@ -79,7 +79,7 @@ export default function Comment({ comment, depth = 0, parentItemId = null }) {
                           rel="noopener noreferrer"
                           className="hover:underline text-slate-400 hover:text-slate-300"
                         >
-                          reply
+                          .reply.
                         </a>
                       </div>
                       {replies.length > 0 && (
