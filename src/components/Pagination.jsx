@@ -6,8 +6,10 @@ export default function Pagination({ currentPage = 1, hasNext = true }) {
   const nextPage = currentPage + 1;
 
   const buildUrl = (pageNum) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', pageNum.toString());
     const [base] = location.pathname.split('?');
-    return `${base}?page=${pageNum}`;
+    return `${base}?${searchParams.toString()}`;
   };
   
   return (

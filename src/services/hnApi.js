@@ -52,6 +52,53 @@ export const getDomain = (url) => {
   }
 };
 
+// Fetch stories from a specific domain using Algolia Search API
+export const getStoriesFromDomain = async (domain, page = 0) => {
+  const hitsPerPage = 50; // Fetch more to account for filtering
+  try {
+    const query = encodeURIComponent(domain);
+    const response = await fetch(
+      `https://hn.algolia.com/api/v1/search_by_date?query=${query}&restrictSearchableAttributes=url&hitsPerPage=${hitsPerPage}&page=${page}&numericFilters=story_id>0`
+    );
+    const data = await response.json();
+    
+    if (!data.hits || data.hits.length === 0) {
+      return { stories: [], totalHits: 0, hasMore: false };
+    }
+    
+    const filtered = data.hits
+      .filter(hit => {
+        if (!hit.url || !hit.title) return false;
+        if (hit.title === '[deleted]' || hit.author === null) return false;
+        const hitDomain = getDomain(hit.url);
+        return hitDomain === domain;
+      })
+      .map(hit => ({
+        id: parseInt(hit.objectID) || hit.story_id,
+        title: hit.title,
+        url: hit.url,
+        by: hit.author,
+        score: hit.points || 0,
+        time: hit.created_at_i,
+        descendants: hit.num_comments || 0,
+        kids: hit.children || [],
+      }));
+    
+    const hasMore = data.hits.length === hitsPerPage && 
+                    (page + 1) * hitsPerPage < 1000 &&
+                    filtered.length > 0;
+    
+    return {
+      stories: filtered,
+      totalHits: data.nbHits || filtered.length,
+      hasMore: hasMore,
+    };
+  } catch (error) {
+    console.error('Error fetching stories from domain:', error);
+    return { stories: [], totalHits: 0, hasMore: false };
+  }
+};
+
 // Helper to format time
 export const timeAgo = (timestamp) => {
   if (!timestamp) return '';

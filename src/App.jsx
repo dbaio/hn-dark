@@ -4,6 +4,7 @@ import ItemDetail from './pages/ItemDetail';
 import Comments from './pages/Comments';
 import Past from './pages/Past';
 import About from './pages/About';
+import FromSite from './pages/FromSite';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/jobs" element={<StoryList type="jobs" />} />
         <Route path="/comments" element={<Comments />} />
         <Route path="/past" element={<Past />} />
+        <Route path="/from" element={<FromSite />} />
         <Route path="/item/:id" element={<ItemDetail />} />
         <Route path="/user/:id" element={<div>User page (coming soon)</div>} />
         <Route path="/about" element={<About />} />

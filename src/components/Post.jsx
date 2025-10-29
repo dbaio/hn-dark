@@ -57,9 +57,12 @@ export default function Post({ post, index, showIndex = true }) {
                   </Link>
                 )}
                 {post.url && (
-                  <span className="text-xs text-slate-500">
+                  <Link
+                    to={`/from?site=${getDomain(post.url)}`}
+                    className="text-xs text-slate-500 hover:underline"
+                  >
                     ({getDomain(post.url)})
-                  </span>
+                  </Link>
                 )}
               </div>
               <div className="text-xs text-slate-500">

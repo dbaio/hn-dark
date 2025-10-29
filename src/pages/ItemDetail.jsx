@@ -108,7 +108,12 @@ export default function ItemDetail() {
                     </Link>
                     {item.time && ` ${timeAgo(item.time)}`}
                     {item.url && (
-                      <span className="ml-1">({getDomain(item.url)})</span>
+                      <Link
+                        to={`/from?site=${getDomain(item.url)}`}
+                        className="ml-1 hover:underline text-slate-400 hover:text-slate-300"
+                      >
+                        ({getDomain(item.url)})
+                      </Link>
                     )}
                     {item.kids && item.kids.length > 0 && (
                       <span className="ml-1">
