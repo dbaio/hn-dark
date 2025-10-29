@@ -5,6 +5,7 @@ import Comments from './pages/Comments';
 import Past from './pages/Past';
 import About from './pages/About';
 import FromSite from './pages/FromSite';
+import User from './pages/User';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/past" element={<Past />} />
         <Route path="/from" element={<FromSite />} />
         <Route path="/item/:id" element={<ItemDetail />} />
-        <Route path="/user/:id" element={<div>User page (coming soon)</div>} />
+        <Route path="/user/:id" element={<User />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
